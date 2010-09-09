@@ -1,0 +1,48 @@
+h1. Chameleon Javascript Color Manipulation Library
+
+A Simple yet powerful color manipulation lib written in javascript based on the color theory http://www.tigercolor.com/color-lab/color-theory/color-theory-intro.htm
+
+h3. Dependencies
+
+Neon Javascript Class DSL http://github.com/azendal/neon
+
+h3. Browser support 
+
+All Major Browsers
+
+h3. Examples
+
+<pre><code class="html">
+  // Make an instance of Chameleon
+  var color = new Chameleon('#00FF00');
+  
+  color.getHue(); // returns 120
+  
+  color.setSaturation(20); // modifies the saturation value
+  
+  color.rotateBy(15); // shift the hue value the given degrees
+  
+  // Test if a Color is Legible over some other Background Color
+  var text       = new Chameleon('#00FF00');
+  var background = new Chameleon('#FF0000');
+  
+  text.isLegible(background); // returns true
+  
+  text.getLegibles(background) // returns an array of Chameleon Objects with modified saturation and values that are readable on the given background color
+  
+</code></pre>
+
+h3. Help and Contact
+
+You are very welcome to contribute. Just fork the git repository and create a new issue, send a pull request or contact me personally.
+
+
+h3. Contributors
+
+Sergio de la Garza (Lead Developer)
+	-sergio.delagarza [at] gmail
+	-@sgarza (Twitter)
+
+Fernando Trasviña (Core Member Lead)
+	-trasvina [at] gmail
+	-@azendal (Twitter)
