@@ -5,13 +5,13 @@ found across the web.
 
 In this case its exposed as Chameleon for Easier coding.
 
+Example:
+  color = new Cameleon('#FF0000'); // Returns Chameleon Object
+
+
 @namespace none
 @type Object
 @requires Neon http://github.com/azendal/neon
-
-Example:
-  color = new Cameleon('#FF0000');
-Returns Chameleon Object
 **/
 Class('Chameleon')({
     RGBRegExp : /^\s*rgba?\s*\((\d+)\,\s*(\d+)\,\s*(\d+)(,\s*(\d+))?\)\s*$/,
