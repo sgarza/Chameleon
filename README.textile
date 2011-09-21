@@ -5,6 +5,7 @@ A Simple yet powerful color manipulation lib written in javascript based on the 
 h3. Dependencies
 
 Neon Javascript Class DSL http://github.com/azendal/neon
+jQuery http://jquery.com
 
 h3. Browser support 
 
@@ -28,7 +29,7 @@ h3. Examples
   
   text.isLegible(background); // returns true
   
-  text.getLegibles(background) // returns an array of Chameleon Objects with modified saturation and values that are readable on the given background color
+  text.getLegibles(background) // returns an array of "STRING" Objects with modified saturation and values that are readable on the given background color
   
 </code></pre>
 
