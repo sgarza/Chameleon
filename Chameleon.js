@@ -16,8 +16,8 @@ Class('Chameleon')({
     HTMLShortRegExp : /^\#([0-9A-Fa-f]{3})$/,
 
     RGBToHSV : function RGBToHSV(r,g,b){
-        r = r/255,
-        g = g/255,
+        r = r/255;
+        g = g/255;
         b = b/255;
 
         var h,s,v;
@@ -34,7 +34,7 @@ Class('Chameleon')({
             h = (60 * ( (r - g)/ (max - min) ) + 240);
         }
 
-        if (max == 0) {
+        if (max === 0) {
             s = 0;
         } else {
             s = (max - min) / max;
@@ -50,7 +50,7 @@ Class('Chameleon')({
             h : h,
             s : s,
             v : v
-        }
+        };
     },
 
     HexStringToHSV : function HexStringToHSV(hexString){
@@ -66,7 +66,7 @@ Class('Chameleon')({
     HSVToRGB : function HSVToRGB(h,s,v){
         var r,g,b;
 
-        if (s == 0) {
+        if (s === 0) {
             r = g = b = Math.round(v * 2.55);
         } else {
             h /= 60;
@@ -97,7 +97,7 @@ Class('Chameleon')({
             r : r,
             g : g,
             b : b
-        }
+        };
     },
 
     prototype : {
@@ -110,6 +110,7 @@ Class('Chameleon')({
         isAchromatic : false,
 
         init : function init(config){
+            var hsv;
             if (config instanceof Chameleon) {
                 this._h = config.getHue();
                 this._s = config.getSaturation();
@@ -117,13 +118,13 @@ Class('Chameleon')({
             } else if (config === 'transparent') {
                 this._a = 0;
             } else if (typeof(config) == 'string' && this.constructor.RGBRegExp.test(config)) {
-                var hsv = this.constructor.RGBToHSV(parseInt(RegExp.$1), parseInt(RegExp.$2), parseInt(RegExp.$3));
+                hsv = this.constructor.RGBToHSV(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10), parseInt(RegExp.$3, 10));
                 this._h = hsv.h;
                 this._s = hsv.s;
                 this._v = hsv.v;
                 this._o = RegExp.$5;
             } else if (typeof(config) == 'string' && this.constructor.HTMLRegExp.test(config)){
-                var hsv = this.constructor.HexStringToHSV(RegExp.$1);
+                hsv = this.constructor.HexStringToHSV(RegExp.$1);
                 this._h = hsv.h;
                 this._s = hsv.s;
                 this._v = hsv.v;
@@ -133,14 +134,14 @@ Class('Chameleon')({
                 for (var i=0; i < split.length; i++) {
                     longVersion.push(split[i]);
                     longVersion.push(split[i]);
-                };
+                }
                 var hex = longVersion.join('');
-                var hsv = this.constructor.HexStringToHSV(hex);
+                hsv = this.constructor.HexStringToHSV(hex);
                 this._h = hsv.h;
                 this._s = hsv.s;
                 this._v = hsv.v;
             } else if ((config instanceof Object) && config.hasOwnProperty('r') && config.hasOwnProperty('g') && config.hasOwnProperty('b')){
-                var hsv = this.constructor.RGBToHSV(config.r, config.g, config.b);
+                hsv = this.constructor.RGBToHSV(config.r, config.g, config.b);
                 this._h = hsv.h;
                 this._s = hsv.s;
                 this._v = hsv.v;
@@ -158,7 +159,7 @@ Class('Chameleon')({
                 console.exception(this, config);
             }
 
-            if (this._s == 0) {
+            if (this._s === 0) {
                 this.isAchromatic = true;
             }
         },
@@ -183,10 +184,10 @@ Class('Chameleon')({
         setSaturation : function setSaturation(value){
             this._s = value;
             
-            if (this._s == 0) {
-                this.isAchromatic = true
+            if (this._s === 0) {
+                this.isAchromatic = true;
             } else {
-                this.isAchromatic = false
+                this.isAchromatic = false;
             }
             
             return this;
@@ -214,18 +215,18 @@ Class('Chameleon')({
         },
 
         saturateBy: function saturateBy(value){
-            if (this._s == 0) {
-            	this.isAchromatic = true;
+            if (this._s === 0) {
+                this.isAchromatic = true;
             } else {
-            	this.setSaturation(this._s + value);
+                this.setSaturation(this._s + value);
             }
             
             if (this._s > 100) {
               this._s = 100;
             }
             
-            if (this.isAchromatic == true) {
-            	this._s = 0;
+            if (this.isAchromatic === true) {
+                this._s = 0;
             }
             return this;
         },
@@ -238,7 +239,7 @@ Class('Chameleon')({
               this.isAchromatic = true;
             }
             
-			if (this.isAchromatic == true) {
+			if (this.isAchromatic === true) {
 				this._s = 0;
 			}
 			
@@ -270,70 +271,71 @@ Class('Chameleon')({
         },
 
         transform : function transform(h,s,v){
-            if(h > -1){ this._h = h }
-            if(s > -1){ this._s = s }
-            if(v > -1){ this._v = v }
+            if(h > -1){ this._h = h; }
+            if(s > -1){ this._s = s; }
+            if(v > -1){ this._v = v; }
             
-            if (this._s == 0) {
-            	this.isAchromatic = true;
+            if (this._s === 0) {
+                this.isAchromatic = true;
             }
             
-            if (this.isAchromatic == true) {
-            	this._s = 0;
+            if (this.isAchromatic === true) {
+                this._s = 0;
             }
             
             return this;
         },
 
-    	setSV : function setSV(s,v){
-    		this.transform(-1, s, v);
-    		return this;
-    	},
+        setSV : function setSV(s,v){
+            this.transform(-1, s, v);
+            return this;
+        },
 	
-    	setBalancedSV : function setBalancedSV(s,v){
-    		var grayscale = this.toGray();
-    		
-    		if (grayscale._v > 50) {
-    			if (s > -1) {
-    				this.desaturateBy(s);
-    			}
-    			if (v > -1) {
-    				this.obscureBy(v);
-    			}
-    		} else {
-    			if (s > -1) {
-    				this.saturateBy(s);
-    			}
-    			if (v > -1) {
-    				this.iluminateBy(v);
-    			}
-    		}
-    		return this;
-    	},
-    	
-    	gradientSV : function gradientSV(s,v){
-    		if (this._v > 50) {
-    			if (s > -1 && this.saturation == 100 ) {
-    				this.desaturateBy(s);
-    			} else if (s > -1 && this.saturation == 0) {
+        setBalancedSV : function setBalancedSV(s,v){
+            var grayscale = this.toGray();
+
+            if (grayscale._v > 50) {
+                if (s > -1) {
+                    this.desaturateBy(s);
+                }
+
+                if (v > -1) {
+                    this.obscureBy(v);
+                }
+            } else {
+                if (s > -1) {
+                    this.saturateBy(s);
+                }
+                if (v > -1) {
+                    this.iluminateBy(v);
+                }
+            }
+            return this;
+        },
+
+        gradientSV : function gradientSV(s,v){
+            if (this._v > 50) {
+                if (s > -1 && this.saturation == 100 ) {
+                    this.desaturateBy(s);
+                } else if (s > -1 && this.saturation === 0) {
                     this.saturateBy(s);
                 }
                 
-    			if (v > -1) {
-    				this.obscureBy(v);
-    			}
-    		} else {
-    			if (s > -1 && this.saturation == 0) {
-    				this.saturateBy(s);
-    			} else if (s > -1 && this.saturation == 100 ) {
+                if (v > -1) {
+                    this.obscureBy(v);
+                }
+            } else {
+                if (s > -1 && this.saturation === 0) {
+                    this.saturateBy(s);
+                } else if (s > -1 && this.saturation == 100 ) {
                     this.desaturateBy(s);
                 }
-    			if (v > -1) {
-    				this.iluminateBy(v);
-    			}
-    		}
-    		return this;
-    	},
+                if (v > -1) {
+                    this.iluminateBy(v);
+                }
+            }
+            return this;
+        },
 
         copy : function copy(){
             return new this.constructor(this);
@@ -345,7 +347,7 @@ Class('Chameleon')({
             var c2 = this.toGray();
 
             if (Math.abs(c1.getValue() - c2.getValue()) > 30) {
-                return true
+                return true;
             }
 
             return false;
@@ -359,9 +361,10 @@ Class('Chameleon')({
             if (this.isLegible(color)) {
                 legibleColors.push(color);
             }
-
+            
+            var v;
             if (color.isAchromatic) {
-                for(var v = 0; v <= 100; v += 1){
+                for(v = 0; v <= 100; v += 1){
                     currentColor = new this.constructor({h:h,s:0,v:v});
                     if (this.isLegible(currentColor)) {
                         legibleColors.push(currentColor);
@@ -369,7 +372,7 @@ Class('Chameleon')({
                 }
             } else {
                 for(var s = 0; s <= 100; s += 10){
-                    for(var v = 0; v <= 100; v += 10){
+                    for(v = 0; v <= 100; v += 10){
                         currentColor = new this.constructor({h:h,s:s,v:v});
                         if (this.isLegible(currentColor)) {
                             legibleColors.push(currentColor);
@@ -386,12 +389,12 @@ Class('Chameleon')({
 
             var legibles = [];
 
-            for(var i in _legibles){
-                legibles.push(i);
+            for(var j in _legibles){
+                legibles.push(j);
             }
 
-            var withColor = []
-            var withoutColor = []
+            var withColor = [];
+            var withoutColor = [];
 
             $.each(legibles, function(){
                 var color = new Chameleon(this.toString());
@@ -414,14 +417,15 @@ Class('Chameleon')({
 
             legibles = withoutColor.concat(withColor);
 
+            var filteredColors;
             if (legibles <= 10) {
                 filteredColors = legibles;
             } else {
-                var filteredColors = [];
+                filteredColors = [];
                 var colorsLength  = Math.round(legibles.length / 10);
 
-                for (var i=0; i < 9; i++) {
-                    filteredColors.push(legibles[colorsLength * i]);
+                for (var k=0; i < 9; k++) {
+                    filteredColors.push(legibles[colorsLength * k]);
                 }
             }
 
@@ -439,7 +443,7 @@ Class('Chameleon')({
 			
 			for (var i=0; i < legibles.length; i++) {
 				legibleColors.push(new Chameleon(legibles[i].toString()));
-			};
+			}
 
 			return this.byNearestColor(legibleColors)[0];
 		},
@@ -452,7 +456,7 @@ Class('Chameleon')({
 		},
 
         toGray : function toGray(){
-            var r,g,b,hsv;
+            var r,g,b;
             var rgb = this.toRGB();
             r = g = b = Math.round((11*rgb.r + 16*rgb.g + 5*rgb.b) /32);
             return new this.constructor({r:r,g:g,b:b});
@@ -471,8 +475,8 @@ Class('Chameleon')({
         },
 
         toHex : function toHex(){
-            var toHex = Number(this.toHTML().toString().replace('#', '0x'));
-            return toHex;
+            var hex = Number(this.toHTML().toString().replace('#', '0x'));
+            return hex;
         },
 
         toHTML : function toHTML(){
@@ -480,7 +484,7 @@ Class('Chameleon')({
                 return 'transparent';
             }
             
-            var rgb = this.toRGB()
+            var rgb = this.toRGB();
             var rStr = rgb.r.toString(16);
             var gStr = rgb.g.toString(16);
             var bStr = rgb.b.toString(16);
@@ -498,12 +502,12 @@ Class('Chameleon')({
                 return 'transparent';
             }
             
-            var rgb = this.toRGB()
+            var rgb = this.toRGB();
 
             if (!this._o || this._o == 1){
                 return 'rgb('+ rgb.r +', '+ rgb.g +',' + rgb.b +')';
             } else {
-                console.log(this._o)
+                console.log(this._o);
                 return 'rgba('+ rgb.r +', '+ rgb.g +',' + rgb.b +', ' + this._o +')';
             }
             
