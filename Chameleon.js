@@ -4,7 +4,7 @@ and legibility comparison among other common functionality found in other color 
 found across the web.
 
 @type Object
-@requires Neon (http://github.com/azendal/neon), jQuery (http://jquery.com)
+@requires Neon (http://github.com/azendal/neon)
 **/
 Class('Chameleon')({
     COLOR_NAMES : {
@@ -425,16 +425,17 @@ Class('Chameleon')({
             var withColor = [];
             var withoutColor = [];
 
-            $.each(legibles, function(){
-                var color = new Chameleon(this.toString());
+            var legiblesLen = legibles.length;
+            for (var i = 0; i < legiblesLen; i++) {
+                var color = new Chameleon(legibles[i]);
                 var sum   = color._s + color._v;
 
                 if (sum <= 130) {
-                    withoutColor.push(this.toString());
+                    withoutColor.push(legibles[i]);
                 } else {
-                    withColor.push(this.toString());
+                    withColor.push(legibles[i]);
                 }
-            });
+            }
 
             withColor.sort(function(a,b){
                 return parseInt(a.substr(1, a.length - 2), 16) - parseInt(b.substr(1, b.length - 2), 16);
