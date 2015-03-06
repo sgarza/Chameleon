@@ -4,7 +4,7 @@ and legibility comparison among other common functionality found in other color 
 found across the web.
 
 @type Object
-@requires Neon (http://github.com/azendal/neon), jQuery (http://jquery.com)
+@requires Neon (http://github.com/azendal/neon)
 **/
 Class('Chameleon')({
     COLOR_NAMES : {
