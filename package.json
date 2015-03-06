@@ -1,0 +1,35 @@
+{
+  "name": "Chameleon-js",
+  "version": "2.0.0",
+  "description": "Javascript Library to handle Color calculations",
+  "main": "Chameleon.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sgarza/Chameleon.git"
+  },
+  "keywords": [
+    "color",
+    "colors",
+    "hue",
+    "saturation",
+    "triadic",
+    "analogous",
+    "color-manipulation",
+    "color-palette",
+    "legibility"
+  ],
+  "author": "Sergio de la Garza <sergio.delagarza@gmail.com>",
+  "contributors": [
+    {
+      "name": "Fernando Trasviña",
+      "email": "trasvina@gmail.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/sgarza/Chameleon/issues"
+  },
+  "homepage": "https://github.com/sgarza/Chameleon",
+  "dependencies": {
+    "neon": "^2.0.0"
+  }
+}

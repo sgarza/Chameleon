@@ -3,9 +3,15 @@ Chameleon is a color manipulation library, that provides color palette functions
 and legibility comparison among other common functionality found in other color management libraries
 found across the web.
 
+@class Chameleon
+@namespace Global
 @type Object
 @requires Neon (http://github.com/azendal/neon)
 **/
+if (typeof require === 'function') {
+    require('neon');
+}
+
 Class('Chameleon')({
     COLOR_NAMES : {
         "aliceblue":"#f0f8ff","antiquewhite":"#faebd7","aqua":"#00ffff","aquamarine":"#7fffd4","azure":"#f0ffff",
@@ -585,3 +591,7 @@ Class('Chameleon')({
         }
     }
 });
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Chameleon;
+}
